@@ -1,0 +1,196 @@
+using System.Collections;
+using System.Collections.ObjectModel;
+using System;
+
+public class Goblin { }
+
+public class Slime { }
+public class Program
+{
+    private void Awake()
+    {
+        //컬렉션 자료구조는 선언한 변수에 new로 메모리를 할당해야 사용할 수 있다.
+        Hashtable hash = new Hashtable();
+
+        //컬렉션 자료구조는 object타입을 저장하기 때문에 클래스 인스턴스도 저장 가능
+        Goblin goblin = new Goblin();
+        Slime slime = new Slime();
+
+        //요소 추가( []연산자)
+        hash["Goblin"] = goblin;
+
+        //요소 추가(add메소드)
+
+        hash.Add("Slime", slime);
+        hash.Add(1, "정수");
+        hash.Add(1.2f, "실수");
+        hash.Add("안녕하세요 나웅빈입니다", "문자열");
+
+        //hashtable, dictionaly 등과 같이 기존의 for문을 활용할 수 없을 때 사용
+        //foreach(데이터타입 변수명 in 배열/데이터 집합)
+
+        foreach(object key in hash.Keys)
+        {
+            Console.WriteLine($"hash[{key}] = {hash[key]}");
+        }
+
+        if(hash.ContainsKey("Slime"))
+        {
+            Console.WriteLine($"Slime is real");
+        }
+
+        if(hash.ContainsValue(goblin))
+        {
+            Console.WriteLine($"{goblin} is real");
+        }
+
+        Console.WriteLine($"hashtagble count : {hash.Count}");
+
+        hash.Remove("Slime");
+
+        Console.WriteLine($"hashtable count : {hash.Count}");
+
+        hash.Clear();
+
+        Console.WriteLine($"{hash.Count}");
+        Stack stack = new Stack();
+
+        for(int i=0; i<5; i++)
+        {
+            stack.Push(i);
+        }
+
+        //현재 스택에 저장된 요소의 개수
+        Console.WriteLine($"stack Count : {stack.Count}");
+
+        //스택의 최상위 요소를 삭제하지 않고, 요소를 반한할 때 사용
+        Console.WriteLine($"마지막에 추가된 요소 : {stack.Peek()}");
+
+        Console.WriteLine($"stack Count : {stack.Count}");
+
+        //스택의 최상위 요소를 삭제하고, 삭제한 요소를 반환
+
+        object data = stack.Pop();
+        Console.WriteLine($"스택에서 빠져나온 데이터 : {data}");
+
+        Console.WriteLine($"stack count : {stack.Count}");
+        //컬렉션 자료구조는 선언한 변수에 new로 메모리를 할당하여야 함
+
+        stack.Clear();
+
+        Console.WriteLine($"stack count : {stack.Count}"); 
+        Queue queue = new Queue();
+
+        //후단에 새로운 요소 추가
+        for(int i=0; i<5; i++)
+        {
+            queue.Enqueue(i);
+        }
+
+        //현재 큐에 지정된 요소의 개수
+        Console.WriteLine($"Queue count : {queue.Count}");
+
+        //전단에 있는 요소를 삭제하지 않고, 요소를 변경할 때 사용
+
+        Console.WriteLine($"현재 0 번 요소 : {queue.Peek()}");
+
+        Console.WriteLine($"Queue Count :  {queue.Count}");
+
+        //전단에 있는 요소를 삭제하고, 삭제한 요소를 변환
+
+        object data = queue.Dequeue();
+        Console.WriteLine($"큐에서 빠져나온 데이터 : : {data}");
+        Console.WriteLine($"Queue Count : {queue.Count}");
+
+        queue.Clear();
+
+        Console.WriteLine($"queue count : {queue.Count}");
+
+        //컬렉션 자료구조는 선언한 변수에 new로 메모리를 할당해야 사용할 수 있다.
+        ArrayList arrayList = new ArrayList();
+
+        //요소 추가(순차)
+        //object 타입이기 때문에 여러 종류의 데이터 저장 가능
+        Console.WriteLine(arrayList.Add(10));
+        Console.WriteLine(arrayList.Add(12.3f));
+        Console.WriteLine(arrayList.Add("안녕하세요 나웅빈입니다."));
+
+        //데이터 출력
+        Console.WriteLine(arrayList);
+
+        //요소 추가(원하는 위치)
+        arrayList.Insert(1, 100);
+
+        //데이터 출력
+
+        Console.WriteLine(arrayList);
+
+        //요소 추가 (범위, ICollection)
+
+        Collection<int> data = new Collection<int> ();
+        data.Add(1);
+        data.Add(3);
+        data.Add(2);
+        arrayList.AddRange(data);
+
+        //데이터 출력
+
+        Console.WriteLine(arrayList);
+
+        //데이터 정렬 (ArrayList에 정수 데이터만 있을 때 한정으로 사용 가능)
+        //그 외 데이터가 들어있을 경우 에러 발생
+
+        arrayList.Sort();
+
+        //데이터 출력
+        Console.WriteLine(arrayList);
+
+        //요소 삭제(매개변수에 입력된 데이터)
+        arrayList.Remove(10);
+
+        //데이터 출력
+        Console.WriteLine(arrayList);
+
+        //요소 삭제(매개변수에 입력된 위치의 요소)
+        arrayList.RemoveAt(0);
+
+        //데이터 출력
+        Console.WriteLine(arrayList);
+
+        //요소 삭제(첫번째 매개변수 위치부터 두 번째 매개변수 개수만큼 삭제)
+        arrayList.RemoveRange(0, 2);
+
+        Console.WriteLine(arrayList);
+
+        //모든 요소 삭제
+        arrayList.Clear();
+
+        //요소 갯수 출력
+        Console.WriteLine(arrayList.Count);
+
+    }
+}
+
+//public void PrintArrayList(ArrayList list)
+//{
+//    Console.WriteLine("===========================");
+    
+//    for(int i=0; i<list.Count; ++i)
+//    {
+//        Console.WriteLine($"list[{i}] = {list[i]]}");
+//    }
+//}
+
+
+
+//using System.Collections;
+
+//private void Awake()
+//{
+//    //컬랙션 자료구조는 선언한 변수에 메모리를 할당해야 사용할 수 있다.
+//    ArrayList array = new ArrayList;
+//    array.Add(10);
+    
+//    //요소에 접근할 때는 첨자 연산자 []를 사용한다.
+//    Debug.Log(array[0]);
+//}
